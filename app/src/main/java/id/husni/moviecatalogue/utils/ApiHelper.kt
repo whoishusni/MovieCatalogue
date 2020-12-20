@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import id.husni.moviecatalogue.BuildConfig
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.remote.response.MoviesResponse
+import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
 import id.husni.moviecatalogue.data.source.remote.response.SeriesResponse
 import retrofit2.Call
@@ -18,10 +19,10 @@ class ApiHelper {
         const val IMAGE_POSTER_URL = "https://image.tmdb.org/t/p/w500/"
     }
 
-    fun loadMovies(): LiveData<List<MoviesEntity>> {
-        val _list = MutableLiveData<List<MoviesEntity>>()
+    fun loadMovies(): LiveData<List<MoviesResult>> {
+        val _list = MutableLiveData<List<MoviesResult>>()
         EspressoIdlingResource.increment()
-        val list: LiveData<List<MoviesEntity>> = _list
+        val list: LiveData<List<MoviesResult>> = _list
         val client = ApiConfig.getApiService().getMovies(BuildConfig.TMDB_API, "en-US")
         client.enqueue(object : Callback<MoviesResponse> {
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>
@@ -41,13 +42,13 @@ class ApiHelper {
         return list
     }
 
-    fun loadMoviesById(id: String): LiveData<MoviesEntity> {
-        val _movies = MutableLiveData<MoviesEntity>()
+    fun loadMoviesById(id: String): LiveData<MoviesResult> {
+        val _movies = MutableLiveData<MoviesResult>()
         EspressoIdlingResource.increment()
-        val moviesEntity: LiveData<MoviesEntity> = _movies
+        val moviesEntity: LiveData<MoviesResult> = _movies
         val call = ApiConfig.getApiService().getMoviesId(id, BuildConfig.TMDB_API, "en-US")
-        call.enqueue(object : Callback<MoviesEntity> {
-            override fun onResponse(call: Call<MoviesEntity>, response: Response<MoviesEntity>) {
+        call.enqueue(object : Callback<MoviesResult> {
+            override fun onResponse(call: Call<MoviesResult>, response: Response<MoviesResult>) {
                 if (response.isSuccessful) {
                     _movies.value = response.body()
                     EspressoIdlingResource.decrement()
@@ -56,7 +57,7 @@ class ApiHelper {
                 }
             }
 
-            override fun onFailure(call: Call<MoviesEntity>, t: Throwable) {
+            override fun onFailure(call: Call<MoviesResult>, t: Throwable) {
                 Log.e(TAG, t.message.toString())
             }
         })

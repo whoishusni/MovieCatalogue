@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.husni.moviecatalogue.R
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
+import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.ui.detail.DetailCatalogueViewModel
 import id.husni.moviecatalogue.ui.favourite.movies.FavMoviesViewModel
 import id.husni.moviecatalogue.utils.ApiHelper
@@ -39,13 +40,12 @@ class DetailMovieActivity : AppCompatActivity() {
         if (moviesId != null) {
             viewModel.setMovieId(moviesId)
             viewModel.getMovies().observe(this, Observer { movies ->
-                moviesEntity = movies
                 populateMoviesCatalogue(movies)
             })
         }
     }
 
-    private fun populateMoviesCatalogue(moviesEntity: MoviesEntity) {
+    private fun populateMoviesCatalogue(moviesEntity: MoviesResult) {
         tvTitleDetail.text = moviesEntity.title
         tvDateDetail.text = resources.getString(R.string.release_date, moviesEntity.releaseDate)
         tvDetailSummary.text = moviesEntity.overview

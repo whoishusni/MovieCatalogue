@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import id.husni.moviecatalogue.data.source.local.LocalDataSource
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.remote.RemoteDataSource
+import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
 import id.husni.moviecatalogue.utils.AppExecutors
 
@@ -25,9 +26,9 @@ class CatalogueRepository private constructor(
             }
     }
 
-    override fun loadMovies(): LiveData<List<MoviesEntity>> = remoteDataSource.getAllMovies()
+    override fun loadMovies(): LiveData<List<MoviesResult>> = remoteDataSource.getAllMovies()
 
-    override fun loadMoviesById(id: String): LiveData<MoviesEntity> = remoteDataSource.getMoviesById(id)
+    override fun loadMoviesById(id: String): LiveData<MoviesResult> = remoteDataSource.getMoviesById(id)
 
     override fun loadSeries(): LiveData<List<ResultsSeries>> = remoteDataSource.getAllSeries()
 
@@ -35,9 +36,8 @@ class CatalogueRepository private constructor(
 
     //bookmark
     override fun getAllFavMovies(): LiveData<List<MoviesEntity>> = localDataSource.getAllMovies()
-
     override fun addMovieFav(moviesEntity: MoviesEntity) {
-        appExecutors.mainThread().execute { localDataSource.addMovieFav(moviesEntity) }
+
     }
 
 

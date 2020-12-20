@@ -10,7 +10,7 @@ import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 @Dao
 interface CatalogueDao {
     @Insert
-    fun addMovieFav(moviesEntity: MoviesEntity)
+    fun addMovieFav(moviesEntity: List<MoviesEntity>)
 
     @Delete
     fun deleteMovies(moviesEntity: MoviesEntity)

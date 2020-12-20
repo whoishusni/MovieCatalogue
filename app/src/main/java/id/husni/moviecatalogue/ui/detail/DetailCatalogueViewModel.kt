@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import id.husni.moviecatalogue.data.source.CatalogueRepository
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
+import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
 
 class DetailCatalogueViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
@@ -18,7 +19,7 @@ class DetailCatalogueViewModel(private val catalogueRepository: CatalogueReposit
         this.seriesId = seriesId
     }
 
-    fun getMovies(): LiveData<MoviesEntity> = catalogueRepository.loadMoviesById(moviesId)
+    fun getMovies(): LiveData<MoviesResult> = catalogueRepository.loadMoviesById(moviesId)
 
     fun getSeries(): LiveData<ResultsSeries> = catalogueRepository.loadSeriesById(seriesId)
 

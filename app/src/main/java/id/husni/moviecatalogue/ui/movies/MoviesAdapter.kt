@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.husni.moviecatalogue.R
-import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
+import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.ui.detail.movies.DetailMovieActivity
 import id.husni.moviecatalogue.utils.ApiHelper
 import kotlinx.android.synthetic.main.movies_item.view.*
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
-    private val movies = ArrayList<MoviesEntity>()
+    private val movies = ArrayList<MoviesResult>()
 
-    fun setMovies(items : List<MoviesEntity>?){
+    fun setMovies(items : List<MoviesResult>?){
         if (items.isNullOrEmpty()) return
         movies.clear()
         movies.addAll(items)
@@ -34,17 +34,17 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     override fun getItemCount(): Int = movies.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bind(moviesEntity: MoviesEntity) {
+        fun bind(moviesResult: MoviesResult) {
             with(itemView){
-                tvTitleItem.text = moviesEntity.title
-                tvDateItem.text = moviesEntity.releaseDate
+                tvTitleItem.text = moviesResult.title
+                tvDateItem.text = moviesResult.releaseDate
                 Glide.with(context)
-                        .load(ApiHelper.IMAGE_POSTER_URL + moviesEntity.posterPath)
+                        .load(ApiHelper.IMAGE_POSTER_URL + moviesResult.posterPath)
                         .apply(RequestOptions.placeholderOf(R.drawable.ic_broken).error(R.drawable.ic_broken))
                         .into(imgItem)
                 setOnClickListener {
                     val i = Intent(context, DetailMovieActivity::class.java).apply {
-                        putExtra(DetailMovieActivity.EXTRA_MOVIE_ID,moviesEntity.id.toString())
+                        putExtra(DetailMovieActivity.EXTRA_MOVIE_ID,moviesResult.id.toString())
                     }
                     context.startActivity(i)
                 }

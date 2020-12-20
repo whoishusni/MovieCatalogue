@@ -2,6 +2,7 @@ package id.husni.moviecatalogue.utils
 
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.remote.response.MoviesResponse
+import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
 import id.husni.moviecatalogue.data.source.remote.response.SeriesResponse
 import retrofit2.Call
@@ -21,7 +22,7 @@ interface ApiService {
         @Path("id") id: String,
         @Query("api_key") api_key: String,
         @Query("language") language: String
-    ): Call<MoviesEntity>
+    ): Call<MoviesResult>
 
     @GET("/3/discover/tv")
     fun getSeries(

@@ -23,5 +23,5 @@ class LocalDataSource private constructor(private val catalogueDao: CatalogueDao
 
     fun getAllMovies(): LiveData<List<MoviesEntity>> = catalogueDao.getAllMovies()
 
-    fun addMovieFav(moviesEntity: MoviesEntity) = catalogueDao.addMovieFav(moviesEntity)
+    fun addMovieFav(moviesEntity: List<MoviesEntity>) = catalogueDao.addMovieFav(moviesEntity)
 }
