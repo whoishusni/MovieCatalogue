@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+    <ImageView
+        android:id="@+id/imgBgDetail"
+        android:layout_width="0dp"
+        android:layout_height="206dp"
+        android:contentDescription="@string/image"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imgDetail"
+        android:layout_width="145dp"
+        android:layout_height="199dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="136dp"
+        android:contentDescription="@string/image"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@+id/imgBgDetail"
+        app:layout_constraintTop_toTopOf="@+id/imgBgDetail"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvTitleDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imgBgDetail"
+        tools:text="TITLE" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:numStars="5"
+        android:rating="2"
+        android:progressBackgroundTint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitleDetail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleDetail" />
+
+    <TextView
+        android:id="@+id/tvDateDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="Release / Airing Date"
+        app:layout_constraintStart_toStartOf="@+id/imgDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
+
+    <TextView
+        android:id="@+id/tvDetailSummary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvDateDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvDateDetail"
+        tools:text="SUMMARY" />
+</androidx.constraintlayout.widget.ConstraintLayout>
