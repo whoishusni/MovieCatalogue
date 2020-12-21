@@ -37,6 +37,7 @@ class LocalDataSource(context: Context) {
 
     fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean {
         return true
+    //return catalogueDao.getMoviesById(moviesEntity.id) != null
     }
 
     fun addMovieFav(moviesEntity: MoviesEntity){

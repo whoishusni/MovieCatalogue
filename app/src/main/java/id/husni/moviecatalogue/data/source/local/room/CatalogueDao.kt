@@ -12,8 +12,8 @@ interface CatalogueDao {
     @Delete
     fun deleteMovies(moviesEntity: MoviesEntity)
 
-    @Query("SELECT * FROM movies_favourite WHERE id =:id")
-    fun getMoviesById(id: Int): MoviesEntity
+    @Query("SELECT * FROM movies_favourite WHERE id = :id")
+    fun getMoviesById(id: Int?): MoviesEntity?
 
     @Query("SELECT * FROM movies_favourite")
     fun getAllMovies(): LiveData<List<MoviesEntity>>

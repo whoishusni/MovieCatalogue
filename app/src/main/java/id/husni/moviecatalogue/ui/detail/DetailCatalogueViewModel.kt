@@ -22,7 +22,9 @@ class DetailCatalogueViewModel(private val catalogueRepository: CatalogueReposit
 
     fun getSeries(): LiveData<ResultsSeries> = catalogueRepository.loadSeriesById(seriesId)
 
-    fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean = catalogueRepository.isMovieBookmarked(moviesEntity)
+    fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean {
+        return catalogueRepository.isMovieBookmarked(moviesEntity)
+    }
 
     fun addMoviesFave(moviesEntity: MoviesEntity) = catalogueRepository.addMovieFav(moviesEntity)
 

@@ -77,7 +77,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.like_button_menu,menu)
-        this.menu = menu
+        //this.menu = menu
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -86,14 +86,13 @@ class DetailMovieActivity : AppCompatActivity() {
             android.R.id.home -> onBackPressed()
             R.id.action_like ->{
                 if(viewModel.isMovieBookmarked(moviesEntity)){
-                    viewModel.addMoviesFave(moviesEntity)
-                    Toast.makeText(this,"added",Toast.LENGTH_SHORT).show()
-                    item.icon = ContextCompat.getDrawable(this,R.drawable.ic_bookmarked)
-                }
-                else{
                     viewModel.deleteMoviesFave(moviesEntity)
                     Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show()
                     item.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark)
+                } else{
+                    viewModel.addMoviesFave(moviesEntity)
+                    Toast.makeText(this,"added",Toast.LENGTH_SHORT).show()
+                    item.icon = ContextCompat.getDrawable(this,R.drawable.ic_bookmarked)
                 }
 
             }
