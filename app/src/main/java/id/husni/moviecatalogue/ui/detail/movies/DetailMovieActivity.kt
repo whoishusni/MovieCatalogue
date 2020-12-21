@@ -77,13 +77,15 @@ class DetailMovieActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.like_button_menu,menu)
-        //this.menu = menu
+        this.menu = menu
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            android.R.id.home -> onBackPressed()
+            android.R.id.home ->{
+                onBackPressed()
+            }
             R.id.action_like ->{
                 if(viewModel.isMovieBookmarked(moviesEntity)){
                     viewModel.deleteMoviesFave(moviesEntity)

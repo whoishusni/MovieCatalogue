@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.movies_fav_item.view.*
 
 class FavMoviesAdapter : RecyclerView.Adapter<FavMoviesAdapter.ViewHolder>() {
 
-    private val listMovies = ArrayList<MoviesEntity>()
+    private val listMovies : MutableList<MoviesEntity> = mutableListOf()
 
     fun setMoviesFav(items: List<MoviesEntity>) {
         if (items.isNullOrEmpty()) return
