@@ -14,21 +14,27 @@ data class MoviesEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
+    @field:SerializedName("id")
     val id: Int,
 
     @ColumnInfo(name = "title")
+    @field:SerializedName("title")
     val title: String,
 
     @ColumnInfo(name = "release_date")
+    @field:SerializedName("release_date")
     val releaseDate: String,
 
     @ColumnInfo(name = "vote_average")
+    @field:SerializedName("vote_average")
     val voteAverage: Double,
 
     @ColumnInfo(name = "overview")
+    @field:SerializedName("overview")
     val overview: String,
 
     @ColumnInfo(name = "poster_path")
+    @field:SerializedName("poster_path")
     val posterPath: String,
 
     @ColumnInfo(name = "bookmarked")

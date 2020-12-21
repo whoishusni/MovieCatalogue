@@ -26,9 +26,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val factory = MyCustomViewModel.getInstance(this)
-        val viewModel = ViewModelProvider(this, factory)[DetailCatalogueViewModel::class.java]
-
+        val viewModel = obtainViewModel(this)
         val extra = intent.extras
         val seriesId = extra?.getString(EXTRA_SERIES_ID)
         if (seriesId != null) {
@@ -37,6 +35,11 @@ class DetailSeriesActivity : AppCompatActivity() {
                 populateSeriesCatalogue(series)
             })
         }
+    }
+
+    private fun obtainViewModel(activity: DetailSeriesActivity): DetailCatalogueViewModel {
+        val factory = MyCustomViewModel.getInstance(activity.application)
+        return ViewModelProvider(this,factory)[DetailCatalogueViewModel::class.java]
     }
 
     private fun populateSeriesCatalogue(series: ResultsSeries) {

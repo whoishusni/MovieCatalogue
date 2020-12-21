@@ -16,9 +16,9 @@ class MyCustomViewModel private constructor(private val catalogueRepository: Cat
     companion object {
         @Volatile
         private var instance: MyCustomViewModel? = null
-        fun getInstance(context: Context): MyCustomViewModel =
+        fun getInstance(application: Application): MyCustomViewModel =
             instance ?: synchronized(this) {
-                instance ?: MyCustomViewModel(Injection.provideRepo(context))
+                instance ?: MyCustomViewModel(Injection.provideRepo(application))
             }
     }
 

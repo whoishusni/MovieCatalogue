@@ -5,15 +5,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.husni.moviecatalogue.R
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
-import id.husni.moviecatalogue.data.source.remote.response.MoviesResult
 import id.husni.moviecatalogue.ui.detail.DetailCatalogueViewModel
-import id.husni.moviecatalogue.ui.favourite.movies.FavMoviesViewModel
 import id.husni.moviecatalogue.utils.ApiHelper
 import id.husni.moviecatalogue.viewmodel.MyCustomViewModel
 import kotlinx.android.synthetic.main.activity_detail_movie.*
@@ -23,6 +22,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
     lateinit var moviesEntity: MoviesEntity
     lateinit var viewModel: DetailCatalogueViewModel
+    lateinit var menu: Menu
     companion object {
         const val EXTRA_MOVIE_ID = "extra_movie_id"
     }
@@ -32,36 +32,52 @@ class DetailMovieActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val factory = MyCustomViewModel.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[DetailCatalogueViewModel::class.java]
-
+        viewModel = obtainViewModel(this)
         val extra = intent.extras
         val moviesId = extra?.getString(EXTRA_MOVIE_ID)
         if (moviesId != null) {
             viewModel.setMovieId(moviesId)
             viewModel.getMovies().observe(this, Observer { movies ->
+                moviesEntity = movies
                 populateMoviesCatalogue(movies)
             })
         }
     }
 
-    private fun populateMoviesCatalogue(moviesEntity: MoviesResult) {
-        tvTitleDetail.text = moviesEntity.title
-        tvDateDetail.text = resources.getString(R.string.release_date, moviesEntity.releaseDate)
-        tvDetailSummary.text = moviesEntity.overview
-        ratingBar.rating = moviesEntity.voteAverage.toFloat().div(2)
+    private fun obtainViewModel(activity: DetailMovieActivity): DetailCatalogueViewModel{
+        val factory = MyCustomViewModel.getInstance(activity.application)
+        return ViewModelProvider(this, factory)[DetailCatalogueViewModel::class.java]
+    }
+
+    private fun populateMoviesCatalogue(entityMovies: MoviesEntity) {
+        tvTitleDetail.text = entityMovies.title
+        tvDateDetail.text = resources.getString(R.string.release_date, entityMovies.releaseDate)
+        tvDetailSummary.text = entityMovies.overview
+        ratingBar.rating = entityMovies.voteAverage.toFloat().div(2)
         Glide.with(this)
-            .load(ApiHelper.IMAGE_POSTER_URL + moviesEntity.posterPath)
+            .load(ApiHelper.IMAGE_POSTER_URL + entityMovies.posterPath)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_broken).error(R.drawable.ic_broken))
             .into(imgDetail)
         Glide.with(this)
-            .load(ApiHelper.IMAGE_POSTER_URL + moviesEntity.posterPath)
+            .load(ApiHelper.IMAGE_POSTER_URL + entityMovies.posterPath)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_broken).error(R.drawable.ic_broken))
             .into(imgBgDetail)
+
+        //favouriteState()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    private fun favouriteState() {
+        val menuItem = menu.findItem(R.id.action_like)
+        if (viewModel.isMovieBookmarked(moviesEntity)){
+            menuItem.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmarked)
+        }else{
+            menuItem.icon = ContextCompat.getDrawable(this,R.drawable.ic_bookmark)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.like_button_menu,menu)
+        this.menu = menu
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -69,7 +85,17 @@ class DetailMovieActivity : AppCompatActivity() {
         when(item.itemId){
             android.R.id.home -> onBackPressed()
             R.id.action_like ->{
-                viewModel.addMoviesFave(moviesEntity)
+                if(viewModel.isMovieBookmarked(moviesEntity)){
+                    viewModel.addMoviesFave(moviesEntity)
+                    Toast.makeText(this,"added",Toast.LENGTH_SHORT).show()
+                    item.icon = ContextCompat.getDrawable(this,R.drawable.ic_bookmarked)
+                }
+                else{
+                    viewModel.deleteMoviesFave(moviesEntity)
+                    Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show()
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark)
+                }
+
             }
         }
         return super.onOptionsItemSelected(item)

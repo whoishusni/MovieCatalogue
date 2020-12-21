@@ -9,7 +9,7 @@ import java.io.InputStream
 object DummiesData {
     private var gson = Gson()
     fun getMoviesData() =
-        gson.fromJson(jsonFile("MovieDummy"), MoviesResponse::class.java).results
+        gson.fromJson(jsonFile("MovieDummy"), MoviesResponse::class.java).resultMovies
 
     fun getSeriesData() =
         gson.fromJson(jsonFile("SeriesDummy"), SeriesResponse::class.java).results

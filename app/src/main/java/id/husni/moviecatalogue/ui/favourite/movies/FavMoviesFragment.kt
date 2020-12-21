@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.husni.moviecatalogue.R
+import id.husni.moviecatalogue.ui.detail.DetailCatalogueViewModel
 import id.husni.moviecatalogue.viewmodel.MyCustomViewModel
 import kotlinx.android.synthetic.main.fragment_fav_movies.*
 
@@ -28,9 +30,8 @@ class FavMoviesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
             favAdapter = FavMoviesAdapter()
-            val factory = MyCustomViewModel.getInstance(requireContext())
-            viewModel = ViewModelProvider(this,factory)[FavMoviesViewModel::class.java]
 
+            viewModel = obtainViewModel(requireActivity())
             viewModel.getAllFavMovies().observe(this, Observer {
                 favAdapter.setMoviesFav(it)
                 favAdapter.notifyDataSetChanged()
@@ -41,5 +42,10 @@ class FavMoviesFragment : Fragment() {
                 adapter = favAdapter
             }
         }
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity): FavMoviesViewModel {
+        val factory = MyCustomViewModel.getInstance(activity.application)
+        return ViewModelProvider(this, factory)[FavMoviesViewModel::class.java]
     }
 }

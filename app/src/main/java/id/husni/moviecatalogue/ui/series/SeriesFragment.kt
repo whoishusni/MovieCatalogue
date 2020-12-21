@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,8 +28,7 @@ class SeriesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if (activity!=null){
             val adapters = SeriesAdapter()
-            val factory = MyCustomViewModel.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this,factory)[SeriesViewModel::class.java]
+            val viewModel = obtainViewModel(requireActivity())
             showProgressBar(true)
             viewModel.getSeries().observe(viewLifecycleOwner, Observer { series->
                 showProgressBar(false)
@@ -41,6 +41,11 @@ class SeriesFragment : Fragment() {
                 adapter = adapters
             }
         }
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity): SeriesViewModel{
+        val factory = MyCustomViewModel.getInstance(activity.application)
+        return ViewModelProvider(this,factory)[SeriesViewModel::class.java]
     }
 
     private fun showProgressBar(isShow: Boolean){
