@@ -19,13 +19,13 @@ import kotlinx.android.synthetic.main.activity_detail_movie.*
 import kotlinx.android.synthetic.main.content_detail_movie.*
 
 class DetailMovieActivity : AppCompatActivity() {
-
     private lateinit var moviesEntity: MoviesEntity
     private lateinit var viewModel: DetailCatalogueViewModel
     private lateinit var menu: Menu
     companion object {
         const val EXTRA_MOVIE_ID = "extra_movie_id"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)

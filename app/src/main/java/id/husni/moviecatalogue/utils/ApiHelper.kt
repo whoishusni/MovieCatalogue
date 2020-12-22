@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import id.husni.moviecatalogue.BuildConfig
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
+import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 import id.husni.moviecatalogue.data.source.remote.response.MoviesResponse
-import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
 import id.husni.moviecatalogue.data.source.remote.response.SeriesResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,10 +63,10 @@ class ApiHelper {
         return entityMovies
     }
 
-    fun loadSeries(): LiveData<List<ResultsSeries>> {
-        val _list = MutableLiveData<List<ResultsSeries>>()
+    fun loadSeries(): LiveData<List<SeriesEntity>> {
+        val _list = MutableLiveData<List<SeriesEntity>>()
         EspressoIdlingResource.increment()
-        val list: LiveData<List<ResultsSeries>> = _list
+        val list: LiveData<List<SeriesEntity>> = _list
         val call = ApiConfig.getApiService().getSeries(BuildConfig.TMDB_API, "en-US")
         call.enqueue(object : Callback<SeriesResponse> {
             override fun onResponse(call: Call<SeriesResponse>, response: Response<SeriesResponse>
@@ -86,13 +86,13 @@ class ApiHelper {
         return list
     }
 
-    fun loadSeriesById(id: String): LiveData<ResultsSeries> {
-        val _series = MutableLiveData<ResultsSeries>()
+    fun loadSeriesById(id: String): LiveData<SeriesEntity> {
+        val _series = MutableLiveData<SeriesEntity>()
         EspressoIdlingResource.increment()
-        val series: LiveData<ResultsSeries> = _series
+        val series: LiveData<SeriesEntity> = _series
         val call = ApiConfig.getApiService().getSeriesById(id, BuildConfig.TMDB_API, "en-US")
-        call.enqueue(object : Callback<ResultsSeries> {
-            override fun onResponse(call: Call<ResultsSeries>, response: Response<ResultsSeries>) {
+        call.enqueue(object : Callback<SeriesEntity> {
+            override fun onResponse(call: Call<SeriesEntity>, response: Response<SeriesEntity>) {
                 if (response.isSuccessful) {
                     _series.value = response.body()
                     EspressoIdlingResource.decrement()
@@ -101,7 +101,7 @@ class ApiHelper {
                 }
             }
 
-            override fun onFailure(call: Call<ResultsSeries>, t: Throwable) {
+            override fun onFailure(call: Call<SeriesEntity>, t: Throwable) {
                 Log.e(TAG, t.message.toString())
             }
         })

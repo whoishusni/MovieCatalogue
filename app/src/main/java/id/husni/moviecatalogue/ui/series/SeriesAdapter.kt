@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.husni.moviecatalogue.R
-import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
+import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 import id.husni.moviecatalogue.ui.detail.series.DetailSeriesActivity
 import id.husni.moviecatalogue.utils.ApiHelper
 import kotlinx.android.synthetic.main.series_item.view.*
 
 class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.ViewHolder>() {
-    private val series = ArrayList<ResultsSeries>()
+    private val series = ArrayList<SeriesEntity>()
 
-    fun setSeries(items : List<ResultsSeries>?){
+    fun setSeries(items : List<SeriesEntity>?){
         if (items.isNullOrEmpty()) return
         series.clear()
         series.addAll(items)
@@ -34,7 +34,7 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.ViewHolder>() {
     override fun getItemCount(): Int = series.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(series: ResultsSeries) {
+        fun bind(series: SeriesEntity) {
             with(itemView){
                 tvTitleItem.text = series.name
                 tvDateItem.text = series.firstAirDate

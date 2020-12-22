@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import id.husni.moviecatalogue.data.source.CatalogueRepository
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
-import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
+import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 
 class DetailCatalogueViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
     private lateinit var moviesId: String
@@ -20,13 +20,20 @@ class DetailCatalogueViewModel(private val catalogueRepository: CatalogueReposit
 
     fun getMovies(): LiveData<MoviesEntity> = catalogueRepository.loadMoviesById(moviesId)
 
-    fun getSeries(): LiveData<ResultsSeries> = catalogueRepository.loadSeriesById(seriesId)
+    fun getSeries(): LiveData<SeriesEntity> = catalogueRepository.loadSeriesById(seriesId)
 
-    fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean {
-        return catalogueRepository.isMovieBookmarked(moviesEntity)
-    }
+    //bookmark
+    fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean = catalogueRepository.isMovieBookmarked(moviesEntity)
 
     fun addMoviesFave(moviesEntity: MoviesEntity) = catalogueRepository.addMovieFav(moviesEntity)
 
     fun deleteMoviesFave(moviesEntity: MoviesEntity) = catalogueRepository.deleteMovieFav(moviesEntity)
+
+    fun isSeriesBookmarked(seriesEntity: SeriesEntity): Boolean = catalogueRepository.isSeriesBookmarked(seriesEntity)
+
+    fun addSeriesFav(seriesEntity: SeriesEntity) = catalogueRepository.addSeriesFav(seriesEntity)
+
+    fun deleteSeriesFav(seriesEntity: SeriesEntity) = catalogueRepository.deleteSeriesFav(seriesEntity)
+
+
 }

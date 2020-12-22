@@ -2,7 +2,7 @@ package id.husni.moviecatalogue.data.source.remote
 
 import androidx.lifecycle.LiveData
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
-import id.husni.moviecatalogue.data.source.remote.response.ResultsSeries
+import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 import id.husni.moviecatalogue.utils.ApiHelper
 
 class RemoteDataSource private constructor(private val apiHelper: ApiHelper) {
@@ -21,7 +21,7 @@ class RemoteDataSource private constructor(private val apiHelper: ApiHelper) {
 
     fun getMoviesById(id: String): LiveData<MoviesEntity> = apiHelper.loadMoviesById(id)
 
-    fun getAllSeries(): LiveData<List<ResultsSeries>> = apiHelper.loadSeries()
+    fun getAllSeries(): LiveData<List<SeriesEntity>> = apiHelper.loadSeries()
 
-    fun getSeriesById(id: String): LiveData<ResultsSeries> = apiHelper.loadSeriesById(id)
+    fun getSeriesById(id: String): LiveData<SeriesEntity> = apiHelper.loadSeriesById(id)
 }

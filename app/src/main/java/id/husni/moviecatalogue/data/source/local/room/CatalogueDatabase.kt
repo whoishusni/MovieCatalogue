@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
+import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 
-@Database(entities = [MoviesEntity::class], version = 1,exportSchema = false)
+@Database(entities = [MoviesEntity::class, SeriesEntity::class], version = 1,exportSchema = false)
 abstract class CatalogueDatabase: RoomDatabase() {
     abstract fun catalogueDao(): CatalogueDao
     companion object{

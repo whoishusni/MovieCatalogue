@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import id.husni.moviecatalogue.R
 import id.husni.moviecatalogue.ui.favourite.movies.FavMoviesFragment
-import id.husni.moviecatalogue.ui.series.FavSeriesFragment
+import id.husni.moviecatalogue.ui.favourite.series.FavSeriesFragment
 
 class FavCataloguePagerAdapter(private val context: Context, fragmentManager: FragmentManager) :
     FragmentPagerAdapter(

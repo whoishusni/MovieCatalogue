@@ -7,6 +7,4 @@ import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 
 class FavMoviesViewModel(private val catalogueRepository: CatalogueRepository) :ViewModel(){
     fun getAllFavMovies(): LiveData<List<MoviesEntity>> = catalogueRepository.getAllFavMovies()
-
-    fun addMovie(moviesEntity: MoviesEntity) = catalogueRepository.addMovieFav(moviesEntity)
 }

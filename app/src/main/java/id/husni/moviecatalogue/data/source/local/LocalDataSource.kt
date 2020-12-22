@@ -2,6 +2,7 @@ package id.husni.moviecatalogue.data.source.local
 import android.content.Context
 import androidx.lifecycle.LiveData
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
+import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 import id.husni.moviecatalogue.data.source.local.room.CatalogueDao
 import id.husni.moviecatalogue.data.source.local.room.CatalogueDatabase
 import kotlinx.coroutines.Dispatchers
@@ -32,8 +33,8 @@ class LocalDataSource(context: Context) {
             return INSTANCE as LocalDataSource
         }
     }
-
-    fun getAllMovies(): LiveData<List<MoviesEntity>> = catalogueDao.getAllMovies()
+    //movies
+    fun getAllMovies(): LiveData<List<MoviesEntity>> = catalogueDao.getAllMoviesFav()
 
     fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean {
         return catalogueDao.getMoviesById(moviesEntity.id) != null
@@ -44,6 +45,22 @@ class LocalDataSource(context: Context) {
     }
 
     fun deleteMoviesFav(moviesEntity: MoviesEntity){
-        GlobalScope.launch(Dispatchers.IO) { catalogueDao.deleteMovies(moviesEntity) }
+        GlobalScope.launch(Dispatchers.IO) { catalogueDao.deleteMoviesFav(moviesEntity) }
     }
+
+    //series
+    fun getAllSeries(): LiveData<List<SeriesEntity>> = catalogueDao.getAllSeriesFav()
+
+    fun isSeriesBookmarked(seriesEntity: SeriesEntity): Boolean{
+        return catalogueDao.getSeriesById(seriesEntity.id) !=null
+    }
+
+    fun addSeriesFav(seriesEntity: SeriesEntity){
+        GlobalScope.launch(Dispatchers.IO) { catalogueDao.addSeriesFav(seriesEntity) }
+    }
+
+    fun deleteSeriesFav(seriesEntity: SeriesEntity){
+        GlobalScope.launch(Dispatchers.IO) { catalogueDao.deleteSeriesFav(seriesEntity) }
+    }
+
 }
