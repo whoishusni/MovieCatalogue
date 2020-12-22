@@ -20,9 +20,9 @@ import kotlinx.android.synthetic.main.content_detail_movie.*
 
 class DetailMovieActivity : AppCompatActivity() {
 
-    lateinit var moviesEntity: MoviesEntity
-    lateinit var viewModel: DetailCatalogueViewModel
-    lateinit var menu: Menu
+    private lateinit var moviesEntity: MoviesEntity
+    private lateinit var viewModel: DetailCatalogueViewModel
+    private lateinit var menu: Menu
     companion object {
         const val EXTRA_MOVIE_ID = "extra_movie_id"
     }
@@ -31,6 +31,7 @@ class DetailMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_movie)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.detail)
 
         viewModel = obtainViewModel(this)
         val extra = intent.extras
@@ -63,7 +64,7 @@ class DetailMovieActivity : AppCompatActivity() {
             .apply(RequestOptions.placeholderOf(R.drawable.ic_broken).error(R.drawable.ic_broken))
             .into(imgBgDetail)
 
-        //favouriteState()
+        favouriteState()
     }
 
     private fun favouriteState() {
@@ -89,11 +90,11 @@ class DetailMovieActivity : AppCompatActivity() {
             R.id.action_like ->{
                 if(viewModel.isMovieBookmarked(moviesEntity)){
                     viewModel.deleteMoviesFave(moviesEntity)
-                    Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.removed_fave,moviesEntity.title), Toast.LENGTH_SHORT).show()
                     item.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark)
                 } else{
                     viewModel.addMoviesFave(moviesEntity)
-                    Toast.makeText(this,"added",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.added_fave, moviesEntity.title),Toast.LENGTH_SHORT).show()
                     item.icon = ContextCompat.getDrawable(this,R.drawable.ic_bookmarked)
                 }
 

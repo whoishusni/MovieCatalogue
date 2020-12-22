@@ -9,6 +9,7 @@
     <string name="title_activity_detail_series">DetailSeriesActivity</string>
     <string name="like">like</string>
     <string name="favourite">favourite</string>
-
-
+    <string name="detail">Detail</string>
+    <string name="removed_fave">%s removed from favourite list</string>
+    <string name="added_fave">%s added to favourite list</string>
 </resources>

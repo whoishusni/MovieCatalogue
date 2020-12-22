@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -11,6 +12,7 @@ import id.husni.moviecatalogue.R
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.ui.detail.movies.DetailMovieActivity
 import id.husni.moviecatalogue.utils.ApiHelper
+import id.husni.moviecatalogue.utils.MoviesDiffUtilCallback
 import kotlinx.android.synthetic.main.movies_fav_item.view.*
 
 class FavMoviesAdapter : RecyclerView.Adapter<FavMoviesAdapter.ViewHolder>() {
@@ -18,9 +20,11 @@ class FavMoviesAdapter : RecyclerView.Adapter<FavMoviesAdapter.ViewHolder>() {
     private val listMovies : MutableList<MoviesEntity> = mutableListOf()
 
     fun setMoviesFav(items: List<MoviesEntity>) {
-        if (items.isNullOrEmpty()) return
+        val diffCallback = MoviesDiffUtilCallback(listMovies,items)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         listMovies.clear()
         listMovies.addAll(items)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

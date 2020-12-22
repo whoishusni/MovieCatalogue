@@ -36,8 +36,7 @@ class LocalDataSource(context: Context) {
     fun getAllMovies(): LiveData<List<MoviesEntity>> = catalogueDao.getAllMovies()
 
     fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean {
-        return true
-    //return catalogueDao.getMoviesById(moviesEntity.id) != null
+        return catalogueDao.getMoviesById(moviesEntity.id) != null
     }
 
     fun addMovieFav(moviesEntity: MoviesEntity){

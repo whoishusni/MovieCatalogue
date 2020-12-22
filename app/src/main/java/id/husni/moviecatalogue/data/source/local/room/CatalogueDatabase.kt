@@ -19,6 +19,7 @@ abstract class CatalogueDatabase: RoomDatabase() {
                 synchronized(this){
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(context.applicationContext,CatalogueDatabase::class.java,"favourite_list")
+                            .allowMainThreadQueries()
                             .build()
                     }
                 }
