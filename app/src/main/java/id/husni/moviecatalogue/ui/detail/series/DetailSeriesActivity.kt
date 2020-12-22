@@ -31,6 +31,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_series)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.detail)
 
         viewModel = obtainViewModel(this)
         val extra = intent.extras
