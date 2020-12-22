@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import id.husni.moviecatalogue.data.DummiesData
 import id.husni.moviecatalogue.data.source.CatalogueRepository
-import id.husni.moviecatalogue.data.source.remote.response.ResultsMovies
+import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -25,7 +25,7 @@ class MoviesViewModelTest {
     private lateinit var repository: CatalogueRepository
 
     @Mock
-    private lateinit var observer: Observer<List<ResultsMovies>>
+    private lateinit var observer: Observer<List<MoviesEntity>>
 
     @Before
     fun setUp() {
@@ -35,7 +35,7 @@ class MoviesViewModelTest {
     @Test
     fun getMovies() {
         val dummy = DummiesData.getMoviesData()
-        val movies = MutableLiveData<List<ResultsMovies>>()
+        val movies = MutableLiveData<List<MoviesEntity>>()
         movies.value = dummy
         Mockito.`when`(repository.loadMovies()).thenReturn(movies)
         viewModel.getMovies().observeForever(observer)
