@@ -32,8 +32,8 @@ class FavMoviesFragment : Fragment() {
             favAdapter = FavMoviesAdapter()
 
             viewModel = obtainViewModel(requireActivity())
-            viewModel.getAllFavMovies().observe(this, Observer {
-                favAdapter.setMoviesFav(it)
+            viewModel.getAllFavMovies().observe(this, Observer { movies ->
+                favAdapter.submitList(movies)
                 favAdapter.notifyDataSetChanged()
             })
             rvMovies.apply {

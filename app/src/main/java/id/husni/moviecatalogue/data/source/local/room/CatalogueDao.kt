@@ -1,6 +1,7 @@
 package id.husni.moviecatalogue.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
@@ -18,7 +19,7 @@ interface CatalogueDao {
     fun getMoviesById(id: Int?): MoviesEntity?
 
     @Query("SELECT * FROM movies_favourite")
-    fun getAllMoviesFav(): LiveData<List<MoviesEntity>>
+    fun getAllMoviesFav(): DataSource.Factory<Int,MoviesEntity>
 
     //Series Fave
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -31,6 +32,6 @@ interface CatalogueDao {
     fun getSeriesById(id: Int?): SeriesEntity?
 
     @Query("SELECT * FROM series_favourite")
-    fun getAllSeriesFav(): LiveData<List<SeriesEntity>>
+    fun getAllSeriesFav(): DataSource.Factory<Int, SeriesEntity>
 
 }

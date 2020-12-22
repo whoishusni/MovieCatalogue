@@ -31,7 +31,7 @@ class FavSeriesFragment : Fragment() {
             favAdapter = FavSeriesAdapter()
             viewModel = obtainViewModel(requireActivity())
             viewModel.getAllFavSeries().observe(this, Observer { series->
-                favAdapter.setSeriesFav(series)
+                favAdapter.submitList(series)
                 favAdapter.notifyDataSetChanged()
             })
             rvSeries.apply {

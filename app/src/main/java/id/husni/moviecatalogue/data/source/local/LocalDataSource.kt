@@ -1,6 +1,7 @@
 package id.husni.moviecatalogue.data.source.local
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 import id.husni.moviecatalogue.data.source.local.room.CatalogueDao
@@ -34,7 +35,7 @@ class LocalDataSource(context: Context) {
         }
     }
     //movies
-    fun getAllMovies(): LiveData<List<MoviesEntity>> = catalogueDao.getAllMoviesFav()
+    fun getAllMovies(): DataSource.Factory<Int, MoviesEntity> = catalogueDao.getAllMoviesFav()
 
     fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean {
         return catalogueDao.getMoviesById(moviesEntity.id) != null
@@ -49,7 +50,7 @@ class LocalDataSource(context: Context) {
     }
 
     //series
-    fun getAllSeries(): LiveData<List<SeriesEntity>> = catalogueDao.getAllSeriesFav()
+    fun getAllSeries(): DataSource.Factory<Int,SeriesEntity> = catalogueDao.getAllSeriesFav()
 
     fun isSeriesBookmarked(seriesEntity: SeriesEntity): Boolean{
         return catalogueDao.getSeriesById(seriesEntity.id) !=null

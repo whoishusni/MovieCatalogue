@@ -1,6 +1,7 @@
 package id.husni.moviecatalogue.data.source
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import id.husni.moviecatalogue.data.source.local.LocalDataSource
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
@@ -33,7 +34,7 @@ class CatalogueRepository private constructor(
     //bookmark / local data
     override fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean = localDataSource.isMovieBookmarked(moviesEntity)
 
-    override fun getAllFavMovies(): LiveData<List<MoviesEntity>> = localDataSource.getAllMovies()
+    override fun getAllFavMovies(): DataSource.Factory<Int,MoviesEntity> = localDataSource.getAllMovies()
 
     override fun addMovieFav(moviesEntity: MoviesEntity) = localDataSource.addMovieFav(moviesEntity)
 
@@ -41,7 +42,7 @@ class CatalogueRepository private constructor(
 
     override fun isSeriesBookmarked(seriesEntity: SeriesEntity): Boolean = localDataSource.isSeriesBookmarked(seriesEntity)
 
-    override fun getAllFavSeries(): LiveData<List<SeriesEntity>> = localDataSource.getAllSeries()
+    override fun getAllFavSeries(): DataSource.Factory<Int,SeriesEntity> = localDataSource.getAllSeries()
 
     override fun addSeriesFav(seriesEntity: SeriesEntity) = localDataSource.addSeriesFav(seriesEntity)
 

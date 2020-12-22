@@ -18,7 +18,8 @@ ext{
     koin_version = '2.2.1'
     mockitoKotlinVersion = '2.2.0'
     mockitoVersion = '3.6.0'
-    room_version = '2.2.5'
+    room_version = '2.2.6'
+    pagination_version = '2.1.2'
 }
 buildscript {
     ext.kotlin_version = "1.4.10"
