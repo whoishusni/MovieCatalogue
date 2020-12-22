@@ -9,13 +9,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import id.husni.moviecatalogue.R
 import id.husni.moviecatalogue.viewmodel.MyCustomViewModel
 import kotlinx.android.synthetic.main.fragment_fav_series.*
 
 class FavSeriesFragment : Fragment() {
-    lateinit var favAdapter: FavSeriesAdapter
+    private lateinit var favAdapter: FavSeriesAdapter
     lateinit var viewModel: FavSeriesViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

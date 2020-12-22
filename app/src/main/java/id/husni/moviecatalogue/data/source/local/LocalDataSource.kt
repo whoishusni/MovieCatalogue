@@ -1,6 +1,5 @@
 package id.husni.moviecatalogue.data.source.local
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity

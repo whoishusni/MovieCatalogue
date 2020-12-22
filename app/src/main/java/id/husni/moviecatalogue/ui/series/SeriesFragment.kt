@@ -11,9 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import id.husni.moviecatalogue.R
 import id.husni.moviecatalogue.viewmodel.MyCustomViewModel
-import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.android.synthetic.main.fragment_series.*
-import kotlinx.android.synthetic.main.fragment_series.progressBar
 
 class SeriesFragment : Fragment() {
     override fun onCreateView(

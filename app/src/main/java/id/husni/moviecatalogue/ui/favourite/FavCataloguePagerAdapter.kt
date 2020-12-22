@@ -31,7 +31,7 @@ class FavCataloguePagerAdapter(private val context: Context, fragmentManager: Fr
             else -> Fragment()
         }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return context.getString(PAGE_TITLE[position])
     }
 }

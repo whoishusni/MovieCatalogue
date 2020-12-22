@@ -40,19 +40,17 @@ class FavSeriesAdapter: PagedListAdapter<SeriesEntity,FavSeriesAdapter.ViewHolde
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(seriesEntity: SeriesEntity) {
             with(itemView){
-                with(itemView){
-                    tvTitleItem.text = seriesEntity.name
-                    tvDateItem.text = seriesEntity.firstAirDate
-                    Glide.with(context)
-                        .load(ApiHelper.IMAGE_POSTER_URL + seriesEntity.posterPath)
-                        .apply(RequestOptions.placeholderOf(R.drawable.ic_broken).error(R.drawable.ic_broken))
-                        .into(imgItem)
-                    setOnClickListener {
-                        val i = Intent(context, DetailSeriesActivity::class.java).apply {
-                            putExtra(DetailSeriesActivity.EXTRA_SERIES_ID, seriesEntity.id.toString())
-                        }
-                        context.startActivity(i)
+                tvTitleItem.text = seriesEntity.name
+                tvDateItem.text = seriesEntity.firstAirDate
+                Glide.with(context)
+                    .load(ApiHelper.IMAGE_POSTER_URL + seriesEntity.posterPath)
+                    .apply(RequestOptions.placeholderOf(R.drawable.ic_broken).error(R.drawable.ic_broken))
+                    .into(imgItem)
+                setOnClickListener {
+                    val i = Intent(context, DetailSeriesActivity::class.java).apply {
+                        putExtra(DetailSeriesActivity.EXTRA_SERIES_ID, seriesEntity.id.toString())
                     }
+                    context.startActivity(i)
                 }
             }
         }

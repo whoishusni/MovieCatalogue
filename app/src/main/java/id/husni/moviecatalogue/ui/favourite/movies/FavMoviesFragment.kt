@@ -1,17 +1,15 @@
 package id.husni.moviecatalogue.ui.favourite.movies
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import id.husni.moviecatalogue.R
-import id.husni.moviecatalogue.ui.detail.DetailCatalogueViewModel
 import id.husni.moviecatalogue.viewmodel.MyCustomViewModel
 import kotlinx.android.synthetic.main.fragment_fav_movies.*
 

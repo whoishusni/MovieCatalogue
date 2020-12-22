@@ -1,7 +1,7 @@
 package id.husni.moviecatalogue.data.source
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
+import androidx.paging.PagedList
 import id.husni.moviecatalogue.data.source.local.entity.MoviesEntity
 import id.husni.moviecatalogue.data.source.local.entity.SeriesEntity
 
@@ -13,13 +13,13 @@ interface CatalogueDataSource {
 
     //bookmark movie
     fun isMovieBookmarked(moviesEntity: MoviesEntity): Boolean
-    fun getAllFavMovies(): DataSource.Factory<Int, MoviesEntity>
+    fun getAllFavMovies(): LiveData<PagedList<MoviesEntity>>
     fun addMovieFav(moviesEntity: MoviesEntity)
     fun deleteMovieFav(moviesEntity: MoviesEntity)
 
     //bookmark series
     fun isSeriesBookmarked(seriesEntity: SeriesEntity): Boolean
-    fun getAllFavSeries(): DataSource.Factory<Int, SeriesEntity>
+    fun getAllFavSeries(): LiveData<PagedList<SeriesEntity>>
     fun addSeriesFav(seriesEntity: SeriesEntity)
     fun deleteSeriesFav(seriesEntity: SeriesEntity)
 
